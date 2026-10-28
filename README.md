@@ -1,122 +1,49 @@
 # Food Order Management System
 
-A console-based Food Order Management System developed in C for managing cafeteria menu items, customer orders, order statuses, payments, and daily sales reports.
-
-## Table of Contents
-
-- [Overview](#overview)
-- [Features](#features)
-- [Main Menu](#main-menu)
-- [Project Structure](#project-structure)
-- [Requirements](#requirements)
-- [Compilation and Execution](#compilation-and-execution)
-- [Data Storage](#data-storage)
-- [Order Status Workflow](#order-status-workflow)
-- [Payment Management](#payment-management)
-- [Daily Sales Report](#daily-sales-report)
-- [Limitations](#limitations)
-
-## Overview
-
-The Food Order Management System is designed to help cafeteria staff manage basic food ordering and sales operations through a command-line interface.
-
-The system allows staff to view and maintain the food menu, create orders containing multiple items, update order statuses, record payment information, and generate daily order and sales reports.
-
-The program is written in **C** and uses file-based storage to retain menu and order records between program executions.
+A console-based Food Order Management System developed in C. The program allows users to manage a food menu, create customer orders, update order statuses, record payments, and generate daily order and sales reports.
 
 ## Features
 
-### 1. View Menu
-- Display available menu items.
-- View food names, categories, prices, and descriptions where available.
-- Identify items that are sold out.
+1. **View Menu** — Display food names, descriptions, categories, prices, and availability.
+2. **Manage Menu** — Add, edit, remove, and update the availability of food items.
+3. **Create Order** — Create orders containing multiple food items and quantities, calculate subtotals and the total amount, and save confirmed orders.
+4. **Update Order Status** — Update an order's status according to permitted status transitions.
+5. **View Orders** — Display saved orders, including customer information, ordered items, totals, statuses, and payment details.
+6. **Record Payment** — Record payment methods and update payment status.
+7. **Daily Order/Sales Report** — Generate a report based on saved order records.
+8. **Exit** — Close the program.
 
-### 2. Manage Menu
-- Add new food items.
-- Edit existing food item information.
-- Remove food items from the menu.
-- Mark items as available or sold out.
-- Save menu changes to a CSV file.
+## Technologies Used
 
-### 3. Create Order
-- Record the customer's name.
-- Select food items and specify quantities.
-- Add multiple items to one order.
-- Calculate item subtotals and the total order amount automatically.
-- Save the order with its date, order number, and initial status.
-- Store item names and prices in the order so historical records retain the details used when the order was created.
-
-### 4. Update Order Status
-- Find an existing order by its order number.
-- Update its status according to the permitted status transitions.
-- Prevent invalid status changes.
-- Require confirmation when cancelling an order.
-
-### 5. Record Payment
-- Find an existing order.
-- Record a payment method.
-- Mark an order as paid or unpaid.
-- Clear payment information when necessary.
-- Prevent payment updates for cancelled orders.
-
-Supported payment methods:
-- Cash
-- Card
-- Bank Transfer
-- Other
-- Unpaid / no recorded payment
-
-The program records payment information but does not process or verify actual transactions.
-
-### 6. Daily Order/Sales Report
-- Generate a report for a selected date.
-- Display order and sales totals.
-- Calculate collected payments and unpaid amounts.
-- Summarize quantities of items sold.
-- Count cancelled orders separately.
-- Exclude cancelled orders from sales totals and item sales summaries.
-
-## Main Menu
-
-The program uses the following main menu options:
-
-| Option | Function |
-|---|---|
-| 1 | View Menu |
-| 2 | Manage Menu |
-| 3 | Create Order |
-| 4 | Update Order Status |
-| 5 | Record Payment |
-| 6 | Daily Order/Sales Report |
-| 7 | Exit |
+- **Language:** C
+- **Compiler:** GCC
+- **Standard:** C11
+- **Menu storage:** CSV
+- **Order storage:** Binary data file
 
 ## Project Structure
 
-The project is organized into separate C source files to keep related functions together.
-
-| File | Purpose |
-|---|---|
-| `main.c` | Displays the main menu and directs the program to the selected function. |
-| `food_system.h` | Defines data structures, constants, enumerations, and function declarations. |
-| `utils.c` | Contains input handling, validation, and date utility functions. |
-| `menu.c` | Handles menu loading, displaying, editing, and saving. |
-| `order.c` | Handles order creation, storage, retrieval, summaries, and status updates. |
-| `payment.c` | Handles payment information and payment status updates. |
-| `report.c` | Generates daily order and sales reports. |
-| `menu.csv` | Stores menu item information. |
-| `orders_v2.dat` | Stores orders using the newer versioned binary storage format; created when orders are first saved. |
-| `orders.dat` | Legacy order filename retained separately from the newer order file. |
+```text
+Food-Order-Management-System/
+├── main.c              # Main menu and program entry point
+├── food_system.h       # Shared structures, constants, and declarations
+├── utils.c             # Input validation and utility functions
+├── menu.c              # Menu management and CSV operations
+├── order.c             # Order creation, storage, viewing, and status updates
+├── payment.c           # Payment recording
+├── report.c            # Daily order and sales report
+├── menu.csv            # Persistent menu data
+├── orders_v2.dat       # Persistent order records
+└── README.md
+```
 
 ## Requirements
 
-- A C compiler that supports C11 or later, such as GCC.
-- A terminal or command prompt.
-- The project source files in the same directory.
-- A `menu.csv` file, if the program is expected to load an existing menu.
+- GCC compiler
+- Terminal or command-line environment
+- Windows with Git Bash, Linux, or another environment that supports GCC
 
-## Compilation and Execution
-
-### Compile using GCC
+## Compilation
 
 Open a terminal in the project directory and run:
 
@@ -124,120 +51,59 @@ Open a terminal in the project directory and run:
 gcc -std=c11 -Wall -Wextra main.c utils.c menu.c order.c payment.c report.c -o food_system
 ```
 
-The command compiles the source files and produces an executable named `food_system`.
+## Running the Program
 
-### Run on Windows
-
-```bash
-food_system.exe
-```
-
-### Run on Linux or macOS
+In Git Bash or a compatible terminal:
 
 ```bash
 ./food_system
 ```
 
-If compilation fails, check that all source files are present and that the function declarations in `food_system.h` match their implementations.
+On Windows, the compiled executable is `food_system.exe` and can also be run directly from the terminal.
 
 ## Data Storage
 
-The program uses local files instead of a database.
+### `menu.csv`
 
-### Menu storage
+Stores menu information, including food IDs, names, descriptions, categories, prices, and availability. Menu changes are saved to this file so they can persist between program runs.
 
-Menu items are stored in `menu.csv`, which uses comma-separated values.
+### `orders_v2.dat`
 
-The menu data includes:
-- Item ID
-- Item name
-- Category
-- Price
-- Availability
+Stores order records, including order numbers, customer information, dates, ordered items, quantities, totals, order statuses, and payment information.
 
-The program's data structure also supports a description field. The CSV loading and saving implementation must support that field for descriptions to persist between runs.
+The `.dat` file uses a binary format and is not intended to be edited manually.
 
-### Order storage
+**Resetting order data:** Close the program and back up or delete `orders_v2.dat` if you want to start a fresh demonstration. This removes the saved order history. The program can initialize a new order data file when a new order is saved.
 
-New orders are stored in `orders_v2.dat` using a versioned binary format.
+## Order Statuses
 
-Order records contain information such as:
-- Order number
-- Customer name
-- Order date
-- Ordered items and quantities
-- Item prices and subtotals
-- Total order amount
-- Order status
-- Payment status and method
+The system supports the following statuses:
 
-**Important:** Keep `orders_v2.dat` and `menu.csv` when restarting the program if you want to retain the saved data. Back up these files before making changes to the project.
+- Pending
+- Preparing
+- Ready
+- Completed
+- Cancelled
 
-The legacy `orders.dat` file is separate from the new storage format. Existing legacy orders are not automatically migrated simply by changing the filename or compiling the updated program.
+Status changes are restricted to permitted transitions to prevent invalid updates.
 
-## Order Status Workflow
+## Payment Statuses
 
-The system uses five order statuses:
+- **Unpaid** — Payment has not been recorded as paid.
+- **Paid** — Payment has been recorded in the system.
 
-- **Pending** — The order has been created and is awaiting preparation.
-- **Preparing** — The order is being prepared.
-- **Ready** — The order is ready for pickup or serving.
-- **Completed** — The order has been fulfilled.
-- **Cancelled** — The order has been cancelled.
-
-Permitted status transitions:
-
-| Current Status | Allowed Next Status |
-|---|---|
-| Pending | Preparing, Cancelled |
-| Preparing | Pending, Ready, Cancelled |
-| Ready | Preparing, Completed, Cancelled |
-| Completed | Ready |
-| Cancelled | None |
-
-These transitions help prevent invalid status changes. A completed order can be returned to Ready to correct a mistaken completion, while a cancelled order cannot be reopened through the status workflow.
-
-## Payment Management
-
-Payment information is stored separately within each order record.
-
-The system distinguishes between:
-- **Payment status:** Paid or Unpaid.
-- **Payment method:** Cash, Card, Bank Transfer, Other, or None.
-
-An order can be paid before it reaches the Completed status, provided that it has not been cancelled.
-
-Recording a payment only updates the program's records. It does not connect to a bank, payment gateway, or point-of-sale terminal.
-
-## Daily Sales Report
-
-The daily report uses the order date to identify records for the selected day.
-
-The report summarizes:
-- Total sales from non-cancelled orders.
-- Payments recorded as collected.
-- Amounts that remain unpaid.
-- Quantities of items sold.
-- Cancelled order counts.
-
-Cancelled orders are reported separately and excluded from sales and item quantity totals.
-
-Report accuracy depends on the saved order records being readable and consistent.
+Available payment methods include cash, card, bank transfer, and other.
 
 ## Limitations
 
-The system is intended for basic cafeteria operations and has the following limitations:
+- The application runs in a command-line interface.
+- It does not support online ordering or online payment processing.
+- Recording a payment does not independently verify that a transaction occurred.
+- Inventory quantities are not automatically tracked.
+- The system does not provide multi-user access or concurrent order processing.
+- Order fulfillment and preparation are managed manually.
+- Order records use a binary file format rather than a database.
 
-- It does not support online ordering.
-- It does not process online or electronic payments.
-- It cannot independently verify whether a payment was received.
-- Inventory management is limited to item availability; it does not track stock quantities or automatically deduct ingredients.
-- It does not support multiple users working simultaneously.
-- It does not automatically manage food preparation or pickup.
-- Data is stored in local files rather than a database server.
-- The system does not provide a graphical user interface.
-- Legacy order migration requires a separate migration procedure if older order records need to be preserved in the new format.
+## Purpose
 
-## Conclusion
-
-The Food Order Management System demonstrates the use of procedural programming in C to solve a practical cafeteria management problem. It combines modular source files, structured data, input validation, file handling, order processing, payment recording, and basic reporting into one console-based application.
+This project demonstrates fundamental C programming concepts, including functions, structures, enumerations, file handling, input validation, conditional statements, loops, and modular program organization.

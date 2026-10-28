@@ -1,11 +1,11 @@
-id,name,category,price,available
-1,Fried Chicken/Rice,Rice Meals,99.00,1
-2,Plain Rice,Extra,25.00,1
-3,Fried Rice/3pcs Siomai,Rice Meals,80.00,1
-4,Shawarma Rice,Rice Meals,98.00,1
-5,Burger Siomaitake/Rice,Rice Meals,89.00,1
-6,Burger,Snacks,50.00,1
-7,Fries,Snacks,45.00,1
-8,Pizza,Snacks,99.00,1
-9,Ice Cream,Desserts,40.00,1
-10,Soft Drinks,Drinks,30.00,1
+id,name,description,category,price,available
+1,Fried Chicken/Rice,Crispy fried chicken served with a serving of steamed rice,Rice Meals,99.00,1
+2,Plain Rice,A serving of freshly cooked steamed rice,Extra,25.00,1
+3,Fried Rice/3pcs Siomai,Savory fried rice served with three pieces of siomai,Rice Meals,80.00,1
+4,Shawarma Rice,Flavorful shawarma meat served with rice,Rice Meals,98.00,1
+5,Burger Siomaitake/Rice,A savory burger-style siomai meal served with rice,Rice Meals,89.00,1
+6,Burger,A delicious burger served in a soft bun,Snacks,50.00,1
+7,Fries,Crispy golden fries perfect for a quick snack,Snacks,45.00,1
+8,Pizza,A delicious pizza with a savory topping and cheesy goodness,Snacks,99.00,1
+9,Ice Cream,A cold and creamy dessert perfect for satisfying your sweet tooth,Desserts,40.00,1
+10,Soft Drinks,Refreshing chilled soft drinks to accompany your meal,Drinks,30.00,1

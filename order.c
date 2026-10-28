@@ -496,6 +496,27 @@ static int allowed_transition(int current, int next)
 	}
 }
 
+void view_orders(void)
+{
+	int count = count_orders();
+	Order order;
+
+	if (count == 0)
+	{
+		puts("No orders found.");
+		return;
+	}
+
+	for (int i = 1; i <= count; i++)
+	{
+		if (read_order(i, &order))
+		{
+			print_order_summary(&order);
+			puts("---------------");
+		}
+	}
+}
+
 void update_order_status(void)
 {
 	int totalOrders = count_orders();

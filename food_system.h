@@ -99,6 +99,7 @@ int append_order(const Order *o);
 void print_order_summary(const Order *o);
 void create_order(const Food foods[], int count);
 void update_order_status(void);
+void view_orders(void);
 
 /* Payment */
 void record_payment(void);

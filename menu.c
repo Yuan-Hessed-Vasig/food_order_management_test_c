@@ -38,7 +38,7 @@ static int parse_price(const char *s, int64_t *price)
 
 static void print_price(int64_t centavos)
 {
-	printf("₱%" PRId64 ".%02" PRId64,
+	printf("PHP %" PRId64 ".%02" PRId64,
 				 centavos / 100, centavos % 100);
 }
 

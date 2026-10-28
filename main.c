@@ -16,11 +16,12 @@ int main(void)
 		puts("2. Manage Menu");
 		puts("3. Create Order");
 		puts("4. Update Order Status");
-		puts("5. Record Payment");
-		puts("6. Daily Order/Sales Report");
-		puts("7. Exit");
+		puts("5. View Order");
+		puts("6. Record Payment");
+		puts("7. Daily Order/Sales Report");
+		puts("8. Exit");
 
-		choice = read_int("Enter choice: ", 1, 7);
+		choice = read_int("Enter choice: ", 1, 8);
 
 		switch (choice)
 		{
@@ -41,18 +42,22 @@ int main(void)
 			break;
 
 		case 5:
-			record_payment();
+			view_orders();
 			break;
 
 		case 6:
-			daily_sales_order_report();
+			record_payment();
 			break;
 
 		case 7:
+			daily_sales_order_report();
+			break;
+
+		case 8:
 			puts("Exiting Food Order Management System.");
 			break;
 		}
-	} while (choice != 7);
+	} while (choice != 8);
 
 	return 0;
 }
